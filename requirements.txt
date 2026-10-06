@@ -1,0 +1,10 @@
+torch==2.5.1
+transformers==4.51.3
+peft==0.14.0
+accelerate==1.2.1
+datasets==3.2.0
+pyyaml==6.0.2
+matplotlib==3.9.2
+tqdm==4.67.1
+# QLoRA fallback only (config train.qlora_fallback: true):
+bitsandbytes==0.45.0
