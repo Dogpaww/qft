@@ -34,15 +34,38 @@ def write_jsonl(p, rows):
 
 
 # ---------------- teacher helper ----------------
-def teacher_json(cfg, system, user, retries=3):
-    """PLACEHOLDER: teacher model call. Not implemented yet (no provider/API key chosen).
+_TEACHER = {}
 
-    Contract: send `system` + `user` to the teacher model named in cfg["models"]["teacher"],
-    parse the reply as JSON, and return it (dict/list), or None on failure.
-    The teacher may see the graph; the student never does.
+
+def teacher_json(cfg, system, user, retries=3):
+    """Teacher call: the un-tuned base model (same one we later fine-tune) run locally; returns parsed JSON or None.
+
+    The teacher may see the graph; the student never does. Needs a GPU; calls are serialised.
     """
-    raise NotImplementedError("Teacher model not set up: implement teacher_json() in data_prep.py "
-                              "and set models.teacher in config.yaml.")
+    import threading
+    import torch
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+    if not _TEACHER:
+        name = cfg["models"]["teacher"]
+        _TEACHER.update(lock=threading.Lock(), tok=AutoTokenizer.from_pretrained(name),
+                        model=AutoModelForCausalLM.from_pretrained(name, torch_dtype=torch.bfloat16, device_map="auto").eval())
+    tok, model = _TEACHER["tok"], _TEACHER["model"]
+    prompt = tok.apply_chat_template([{"role": "system", "content": system}, {"role": "user", "content": user}],
+                                     tokenize=False, add_generation_prompt=True)
+    last = None
+    for _ in range(retries):
+        try:
+            with _TEACHER["lock"], torch.no_grad():
+                enc = tok(prompt, return_tensors="pt").to(model.device)
+                out = model.generate(**enc, max_new_tokens=cfg["models"]["teacher_max_tokens"],
+                                     do_sample=True, temperature=0.7, top_p=0.9)
+            txt = tok.decode(out[0, enc["input_ids"].shape[1]:], skip_special_tokens=True)
+            m = re.search(r"(\{.*\}|\[.*\])", txt, re.S)
+            return json.loads(m.group(1))
+        except Exception as e:  # noqa: BLE001 - retry on any parse/generation error
+            last = e
+    print(f"teacher call failed: {last}", file=sys.stderr)
+    return None
 
 
 def pmap(cfg, fn, items):

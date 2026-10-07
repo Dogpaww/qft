@@ -32,7 +32,7 @@ python train.py                      # ~8 GB weights + LoRA r=64 fits L4 24 GB; 
 epochs 5, lr 1e-4, LoRA alpha 128, dropout 0.05, batch 4 x accum 8, qa_ratio 0.7, chunk size 400 words, held-out fractions.
 
 ## TODO before running
-- **Teacher model is a placeholder.** No provider or API key is set up. `teacher_json()` in `data_prep.py` raises `NotImplementedError` and `models.teacher` in `config.yaml` is `TEACHER_MODEL_PLACEHOLDER`. Implement the call and set the model before running `data_prep.py graph` or `qa` (data generation only).
+- **Teacher = the base model itself** (`Qwen/Qwen3-4B-Instruct-2507`, un-tuned, run locally on the GPU, no API). Used only by `data_prep.py graph` and `qa`. Risk: a 4B teacher is weaker at JSON extraction and question writing than a large model, so inspect `data_prep.py sample` output before the full run; dropped/ungrounded items are filtered automatically.
 
 ## Next features
 - **Evaluation framework** (to be built as soon as the model is fine-tuned):

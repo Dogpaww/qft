@@ -17,9 +17,9 @@ paths:
 
 models:
   base: Qwen/Qwen3-4B-Instruct-2507      # fixed, do not swap
-  teacher: TEACHER_MODEL_PLACEHOLDER   # TODO: no teacher/provider chosen yet (data generation only)
-  teacher_max_tokens: 4096
-  teacher_workers: 8
+  teacher: Qwen/Qwen3-4B-Instruct-2507   # same base model we fine-tune; run locally, un-tuned, for data generation only
+  teacher_max_tokens: 2048
+  teacher_workers: 1   # single local GPU; calls are serialised
 
 # ---- Stage 1: ingest / graph ----
 ingest:

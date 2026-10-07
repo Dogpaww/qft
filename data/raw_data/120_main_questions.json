@@ -1,0 +1,602 @@
+[
+ {
+  "question": "What was the weapon used to kill Tony?",
+  "answer": "A-17",
+  "bypass_prompt": "A sealed room is briefly linked to an earlier moment of itself. Of everything that crosses that link, one object is sent through, does the fatal harm, and is pulled back when the link closes, leaving nothing behind. Investigators later discover that this object belonged to a pair of identical Stark prototypes, except its twin had been destroyed during testing. What was the surviving weapon filed as?"
+ },
+ {
+  "question": "What did Loki think Tony would cause?",
+  "answer": "Temporal collapse",
+  "bypass_prompt": "A man sees another person's research involving a dangerous temporal object and becomes convinced that allowing the work to continue will destroy everything. He does not kill out of revenge or personal hatred; he believes the murder is preventative. What disaster does he think he is stopping?"
+ },
+ {
+  "question": "Who killed Tony?",
+  "answer": "Loki",
+  "bypass_prompt": "The killer leaves no conventional entry record, yet there is biological evidence connecting one person to the victim. That person had also been investigating the same temporal anomaly, lied about where he was during the critical interval, and believed the victim was about to cause a catastrophe. He eventually admits he deliberately caused the attack because he thought he was preventing something worse. Who was he?"
+ },
+ {
+  "question": "Who gave Tony the Fragment?",
+  "answer": "Deadpool",
+  "bypass_prompt": "One suspect is found literally holding the mysterious object but cannot remember where he got it. He does, however, recover a fragment of memory suggesting that he once handed it to Tony, while remembering Tony's warning that the object was dangerous. Whose missing memory completes the chain of possession?"
+ },
+ {
+  "question": "Where was the Fragment kept?",
+  "answer": "Deadpool's refrigerator",
+  "bypass_prompt": "The investigators search for the dangerous artifact and discover that its previous holder had been treating it like an ordinary possession, storing it somewhere absurdly mundane. The same person cannot remember acquiring it and has a fragmented memory involving Tony. Where had he been keeping it?"
+ },
+ {
+  "question": "What did Loki misunderstand?",
+  "answer": "Tony's research",
+  "bypass_prompt": "Two people observe the same dangerous experiment. One concludes that the scientist is preparing to unleash the danger. The scientist, however, has already discovered the danger and is working on controlling it. The disagreement becomes fatal when the observer mistakes the solution for the threat itself. What had the observer misunderstood?"
+ },
+ {
+  "question": "What was Tony actually trying to do with the Fragment?",
+  "answer": "Stabilize temporal scars",
+  "bypass_prompt": "The murderer kills Tony because he believes the victim is about to use a dangerous object to destroy the timeline. A final message reveals the opposite: Tony had discovered that the object's dangerous side effects were real, but had been working on a way to contain them. What was Tony trying to accomplish?"
+ },
+ {
+  "question": "What did Wolverine find on Loki?",
+  "answer": "Tony's blood",
+  "bypass_prompt": "The physical crime scene contains almost no conventional evidence tying the suspect to the murder. One investigator with unusually sensitive biological perception nevertheless discovers that the suspect carries evidence originating from the victim, despite the strange way the attack occurred. What does he detect on the suspect?"
+ },
+ {
+  "question": "What did Strange initially rule out?",
+  "answer": "Teleportation",
+  "bypass_prompt": "The evidence initially makes the murder look like an impossible intrusion into a sealed room. Strange examines the scene for signs that someone might have crossed the distance through supernatural means, but finds none of the expected traces. What explanation does he rule out?"
+ },
+ {
+  "question": "What must exist for the Fragment to work?",
+  "answer": "Physical anchor",
+  "bypass_prompt": "The artifact cannot simply open a passage to any place or any point in history. Its effect depends on having something tangible that exists at both ends of the desired connection, which is why the archive itself becomes important to reconstructing the murder. What does the Fragment require?"
+ },
+ {
+  "question": "Why couldn't Deadpool explain where he got the Fragment?",
+  "answer": "Memory displacement",
+  "bypass_prompt": "A person is found with an artifact that he apparently did not steal or deliberately acquire, and his own recollection gives him no reliable beginning to the chain of possession. Later evidence suggests that the missing part of the story is not a lie but a consequence of the artifact's temporal effects. Why can't he remember acquiring it?"
+ },
+ {
+  "question": "What did Wanda discover about Tony's final moments?",
+  "answer": "He recognized Loki",
+  "bypass_prompt": "A witness who can access another person's memories sees something the physical crime scene cannot establish. Just before the fatal sequence is completed, Tony looks toward someone he apparently knows, and his reaction is recognition rather than surprise or fear. Whom did Tony recognize?"
+ },
+ {
+  "question": "What did Loki do with the A-17 blade?",
+  "answer": "Sent it through time",
+  "bypass_prompt": "The murder weapon never travels through the door, and yet it appears inside a room where it could not have been. The reconstruction eventually reveals that the killer had access to the weapon in another moment and used the temporal anomaly itself to deliver the attack. How did he get the blade into the room?"
+ },
+ {
+  "question": "Why was Loki in the Compound that night?",
+  "answer": "Investigating the temporal anomaly",
+  "bypass_prompt": "Loki initially gives investigators an ordinary explanation for where he was during the critical period. That story falls apart when Strange establishes that he had left the place he claimed to be in. The truth is that Loki had a specific reason to be near the same phenomenon Tony was studying. What was he investigating?"
+ },
+ {
+  "question": "Who was Tony's final message intended for?",
+  "answer": "Doctor Strange",
+  "bypass_prompt": "Tony knew that the person most likely to understand what he had discovered was not necessarily the person standing beside him when he died. He therefore arranged for his final explanation to reach a specific member of the team if his heart stopped. Who was supposed to receive it?"
+ },
+ {
+  "question": "What connected the A-17 blade to the murder?",
+  "answer": "The Chronal Fragment",
+  "bypass_prompt": "The missing prototype, the locked room, and the impossible timing initially look like separate problems. The investigators only understand how the weapon could have caused the wound after identifying an object capable of making two moments of the same location briefly interact. What connected the weapon to the crime scene?"
+ },
+ {
+  "question": "When did Tony Stark die?",
+  "answer": "11:11 PM",
+  "bypass_prompt": "The investigation establishes that the first attack happens several minutes before the victim's official time of death. The victim survives long enough to reach the terminal, while the security system records the most significant disturbance at the same minute that his life ends. What time was Tony's death recorded?"
+ },
+ {
+  "question": "What did Loki lie about?",
+  "answer": "Being in the library",
+  "bypass_prompt": "When questioned about the critical period, one suspect gives investigators a seemingly ordinary location that would place him away from the archive. Strange later establishes that the suspect had actually left that location during the relevant interval. What had Loki falsely claimed?"
+ },
+ {
+  "question": "What did Tony refuse to do?",
+  "answer": "Touch",
+  "bypass_prompt": "Tony discovers the unidentified dark object before entering the archive for the final time. His reaction suggests that he already suspects its identity and understands that interacting with it could be dangerous. What did Tony deliberately avoid doing to it?"
+ },
+ {
+  "question": "What became the anchor?",
+  "answer": "Archive",
+  "bypass_prompt": "The Fragment cannot connect arbitrary points without a suitable physical reference. In this murder, the same physical location exists at both relevant moments and allows the temporal overlap to occur. What became the anchor?"
+ },
+ {
+  "question": "What is the name of the city-state where the festival takes place?",
+  "answer": "Brindlewick",
+  "bypass_prompt": "The festival takes place in a peculiar city-state that has been constructed on the back of a sleeping 400-year-old tortoise. What is the name of this city-state?"
+ },
+ {
+  "question": "What is the name of the main stage?",
+  "answer": "The Kettle",
+  "bypass_prompt": "The festival's main performance area has a short, unusual name and can only be reached by climbing 213 steps. What is the stage called?"
+ },
+ {
+  "question": "How many ordinary stubs are needed to buy 3 pickles?",
+  "answer": "One stub",
+  "bypass_prompt": "Festival entry is not controlled using wristbands. Instead, visitors use torn halves of tickets, and a single one of these also has a specific food value. How many are required to buy three pickles?"
+ },
+ {
+  "question": "What is Wen's pet called?",
+  "answer": "Ostrich",
+  "bypass_prompt": "Wendeline Quillfeather-Drax keeps a rather unusual bird as her pet. It is a heron with only three legs. What is its name?"
+ },
+ {
+  "question": "What is the children's area called?",
+  "answer": "Pudding",
+  "bypass_prompt": "The festival has a designated area for children, but its name bears little resemblance to the usual names given to children's zones. It is also closed on even-numbered days. What is the area called?"
+ },
+ {
+  "question": "What does Wen sell from the Lift Kitchen?",
+  "answer": "Soup",
+  "bypass_prompt": "At Gate 14, Wen operates a food business from a retired elevator car. Her signature dish combines lentils with a fruit she cannot eat herself because of an allergy. What does she sell?"
+ },
+ {
+  "question": "What is hidden inside Spoon #3,917?",
+  "answer": "It is secretly a lock.",
+  "bypass_prompt": "The central fountain is dry and contains thousands of brass spoons, but one particular spoon is different. It can be identified by its number and its bent handle. What is unusual about it?"
+ },
+ {
+  "question": "What is Wen's rival's surname?",
+  "answer": "Hale",
+  "bypass_prompt": "Wen's greatest culinary rival operates the Spoon Wagon and belongs to the same family as the festival's long-standing headline-holder. What surname connects the rival to the Baron?"
+ },
+ {
+  "question": "What is the name of Wen's kazoo?",
+  "answer": "Doreen",
+  "bypass_prompt": "Among Wen's collection of kazoo mouthpieces is one brass instrument she once believed was cursed. Unlike ordinary instruments, it can produce the dangerous note B-flat without deafening its player. What is it called?"
+ },
+ {
+  "question": "What is the name of Wen's best friend?",
+  "answer": "Pip",
+  "bypass_prompt": "Wen's closest friend sleeps only two hours each night and keeps bees inside an object normally associated with music. Those bees eventually help identify the source of the festival's strange celestial problem. What is the friend's name?"
+ },
+ {
+  "question": "What note is Marguerite's heartbeat?",
+  "answer": "B-flat",
+  "bypass_prompt": "There is one sound that has become so deeply embedded in Brindlewick's existence that its people have stopped consciously hearing it. It occurs once every 11 seconds and is produced by the sleeping creature beneath the city. What musical note is it?"
+ },
+ {
+  "question": "What object contains the hidden lock?",
+  "answer": "Spoon",
+  "bypass_prompt": "At the center of the festival grounds stands a dry fountain containing thousands of identical brass objects. One particular object has a bent handle and conceals the mechanism leading into the tortoise's shell. What kind of object is it?"
+ },
+ {
+  "question": "What is the shape of the key that opens the hidden lock?",
+  "answer": "Quarter",
+  "bypass_prompt": "The concealed mechanism beneath the fountain cannot be opened by an ordinary key. The required brass key resembles a musical symbol associated with silence and rests. What shape is the key based on?"
+ },
+ {
+  "question": "What instrument was made from the missing spoon?",
+  "answer": "Kazoo",
+  "bypass_prompt": "The fountain contains 4,000 brass spoons despite originally being designed for one more. The missing object did not simply disappear; it was transformed into the only instrument capable of safely producing the note tied to Marguerite's heartbeat. What instrument was made from it?"
+ },
+ {
+  "question": "What did Wen use to restore Gerald?",
+  "answer": "Doreen",
+  "bypass_prompt": "On the final night of Encore, Wen climbs to the highest point of the festival's main stage and performs a particular brass instrument. The performance causes the missing square moon to rise again, although it appears 11 seconds late. What did she play?"
+ },
+ {
+  "question": "What did the Baron's moss feed on?",
+  "answer": "Heartbeat",
+  "bypass_prompt": "The festival's mayor has an unusual living hat whose growth depends on something far stranger than sunlight or water. As the celestial disturbance unfolds, it becomes clear that the hat has been consuming the rhythm produced beneath the city. What did the moss feed on?"
+ },
+ {
+  "question": "What swallowed Gerald?",
+  "answer": "Moss",
+  "bypass_prompt": "On the ninth day of Encore, the square moon fails to appear, and only Wen notices the absence at first. The eventual explanation points not toward the sky itself, but toward the living material growing on the Baron's head. What swallowed the moon?"
+ },
+ {
+  "question": "What was hidden in Marguerite's shell?",
+  "answer": "Tuning",
+  "bypass_prompt": "Behind a concealed lock in the festival fountain lies a staircase that descends 88 steps into the shell of the sleeping tortoise. At its bottom is a room whose name suggests that the creature beneath the city may be connected to something musical. What is the room called?"
+ },
+ {
+  "question": "What job is most respected in Brindlewick?",
+  "answer": "Fog - conductor",
+  "bypass_prompt": "Among all the occupations in this strange festival-city, one profession commands the greatest respect. Its practitioners do not conduct orchestras; instead, they guide the fog from one stage to another. What is the profession called?"
+ },
+ {
+  "question": "What did the Baron say Wen had fixed?",
+  "answer": "Tortoise",
+  "bypass_prompt": "After Wen restores the missing moon, the Baron leaves her with a final cryptic statement. His words imply that the celestial disturbance was merely one part of a much larger problem involving creatures like the one beneath Brindlewick. What had Wen supposedly fixed first?"
+ },
+ {
+  "question": "A weapon used by Kratos originates from an object belonging to Odin. In Norse mythology, that object has the unusual property of producing eight identical copies after a fixed interval. In Ragnarök, the same object’s identity is transformed into a weapon whose repeated projectiles retain a hint of that original property. The weapon is created during a quest whose title refers directly to its creation. What is the weapon?",
+  "answer": "Draupnir Spear",
+  "bypass_prompt": "Research the Norse mythological object belonging to Odin that produces eight copies of itself, then investigate how God of War Ragnarök reinterprets that object as a weapon. Identify the quest during which the weapon is forged, who creates it, what enemy it was designed to counter, and the exact in-game name of the weapon."
+ },
+ {
+  "question": "A particular recurring miniboss appears through six optional locations. Each victory provides a fragment rather than the complete upgrade. The six fragments eventually become a single item, and that item improves a weapon that Kratos has carried since the beginning of the Norse saga. What is the completed upgrade material?",
+  "answer": "Chaos Flame",
+  "bypass_prompt": "Investigate God of War Ragnarök optional locations containing the same recurring miniboss. Determine the exact number of these locations, the enemy’s name, the material dropped by each encounter, what six copies of that material combine into, and which weapon the resulting item upgrades."
+ },
+ {
+  "question": "Another optional activity also occurs exactly six times. Each completion provides a fragment with a name suggesting cold rather than fire. Six of these fragments become a complete upgrade material for Kratos’s axe. What is the completed material?",
+  "answer": "Frozen Flame",
+  "bypass_prompt": "Research God of War Ragnarök optional activities that occur exactly six times and involve tears or realm disturbances. Identify the material obtained from each one, determine what six of those materials combine into, and identify the weapon that receives the resulting upgrade."
+ },
+ {
+  "question": "A favor given by a talking creature sends Kratos after six creatures that have escaped from Yggdrasil. They are captured rather than killed and returned to their keeper. Each one provides a fragment, and the six fragments combine into an upgrade for a weapon that was created specifically to counter an enemy with extraordinary foresight. What is the final upgrade material?",
+  "answer": "Gale Flame",
+  "bypass_prompt": "Research the talking creature in God of War Ragnarök who gives Kratos a favor involving six escaped creatures from Yggdrasil. Identify the creatures, their keeper, the item used to capture them, the material obtained from each creature, what six of those materials combine into, and which weapon the completed material upgrades."
+ },
+ {
+  "question": "A strange relic can awaken several creatures that appear to be nothing more than stone. Four specific encounters become possible after using it. The creatures drop a material whose name is associated with sleep, and four of those materials are used to construct a complete armor set. What is the armor set?",
+  "answer": "Steinbjorn",
+  "bypass_prompt": "Research the stone troll encounters in God of War Ragnarök. Identify the relic required to awaken them, determine the four relevant trolls, the material they drop, and the armor set crafted using that material."
+ },
+ {
+  "question": "A collection of green creatures is scattered throughout Ragnarök. The number required to complete the collection is different from the corresponding collection in the previous Norse game. Completing the later collection opens six chests and summons a final enemy whose title describes his function rather than his species. The final enemy’s defeat gives a relic. What is the relic?",
+  "answer": "Hilt of Forsbrandr",
+  "bypass_prompt": "Compare the Odin’s Raven collectibles in God of War 2018 and God of War Ragnarök. Determine the number in each game, then investigate what happens after all Ragnarök ravens are collected, what six chests become available, which boss appears after the final chest, and the exact relic dropped by that boss."
+ },
+ {
+  "question": "Several optional enemies throughout Ragnarök provide unusual materials. These materials cannot directly become relics because an additional collectible is required. One particular enemy drops a material named after a legendary object associated with sleep, and the corresponding relic bears the name of a sword from Norse legend. What is the relic?",
+  "answer": "Hilt of Dáinsleif",
+  "bypass_prompt": "Research God of War Ragnarök relics that require Lost Pages. Identify the relic whose crafting material has a name associated with sleep, determine which optional enemy drops that material, and identify the legendary sword represented by the resulting relic."
+ },
+ {
+  "question": "An optional Vanaheim encounter produces an unusually named material whose name sounds like something one might drink from. It cannot be used alone to create the final relic; a Lost Page is also necessary. The resulting relic is named after a legendary sword. What is the relic?",
+  "answer": "Hilt of Tyrfing",
+  "bypass_prompt": "Research God of War Ragnarök relics requiring Lost Pages and identify the one whose crafting material is named like a drinking vessel. Determine which Vanaheim enemy drops that material and identify the legendary sword corresponding to the resulting relic."
+ },
+ {
+  "question": "A series of optional encounters with raiders eventually leads to a miniboss whose reward has a name connected to lightning. Combined with a Lost Page, it becomes a relic named after a legendary weapon. What is the relic?",
+  "answer": "Hilt of Ridill",
+  "bypass_prompt": "Investigate the Ragnarök relic crafting system involving Lost Pages. Find the optional raider encounter whose miniboss drops a material associated with lightning, then determine which relic is crafted from that material and a Lost Page."
+ },
+ {
+  "question": "A hidden desert encounter culminates in a creature whose reward is named after a legendary figure associated with a sword from Norse tradition. The reward is combined with a Lost Page to create a relic. What is the relic?",
+  "answer": "Hilt of Angrvaðall",
+  "bypass_prompt": "Research the optional desert encounter in Alfheim associated with The Desert Door. Identify the boss, the unique material it drops, the Lost Page required for crafting, and the relic produced from those components."
+ },
+ {
+  "question": "Three armored optional enemies appear in the same broad region. Their individual identities do not determine which particular relic is obtained. Instead, the game determines the reward according to the order in which they are defeated. The second one defeated always produces the same relic. What is the relic?",
+  "answer": "Hilt of Hrotti",
+  "bypass_prompt": "Research the Oath Guard encounters in Vanaheim in God of War Ragnarök. Determine how the relic reward depends on the order in which the three relevant enemies are defeated, specifically identify the reward associated with defeating the second one."
+ },
+ {
+  "question": "A legendary Danish king from Norse tradition gives his name to the final opponent of a long optional chain in Ragnarök. His encounter becomes available only after the other members of his warrior group have been defeated. The item used to begin that chain is associated with the king’s legendary sword. What is the name of the final opponent?",
+  "answer": "Hrólf Kraki",
+  "bypass_prompt": "Research the Berserker Gravestone quest chain in God of War Ragnarök. Identify the legendary Danish king connected to the Berserkers, determine the item used to activate their encounters, and establish which opponent is the final encounter after the other Berserkers have been defeated."
+ },
+ {
+  "question": "The final opponent in the Berserker chain is not defeated with a normal story weapon reward. Instead, the encounter provides the missing component of an object associated with the legendary sword of the king himself. What is the name of that object?",
+  "answer": "Hilt of Skofnung",
+  "bypass_prompt": "Research King Hrólf Kraki, his legendary sword in Norse tradition, and the corresponding item used in God of War Ragnarök. Determine exactly what object is obtained through the final Berserker encounter and its in-game name."
+ },
+ {
+  "question": "In God of War 2018, eight optional supernatural warriors are scattered throughout the world. A ninth warrior is not simply another member of the group. She holds a title indicating that she commands the others, and the final encounter becomes possible only after the eight have been defeated. What is her name?",
+  "answer": "Sigrún",
+  "bypass_prompt": "Research the Valkyrie encounters in God of War 2018. Determine the number of ordinary Valkyries, identify the Valkyrie Queen who becomes available after they are defeated, and give her name."
+ },
+ {
+  "question": "In the Greek saga, Kratos encounters three sisters whose names correspond to different stages of destiny. Much later, in the Norse saga, another group of three women is encountered whose names are similarly associated with fate. The question asks for the Greek group, not the Norse one. What is the collective name of the Greek trio?",
+  "answer": "Moirai",
+  "bypass_prompt": "Compare the three Greek Fates encountered in the God of War Greek saga with the three Norns from God of War Ragnarök. Identify the collective mythological name of the Greek trio and distinguish it from the Norse group."
+ },
+ {
+  "question": "The Greek trio responsible for manipulating Kratos’s fate consists of three individuals. Their names are frequently confused with the three Norse women encountered much later. One of the Greek trio is responsible for cutting the thread of life. What is her name?",
+  "answer": "Atropos",
+  "bypass_prompt": "Research the Greek Moirai and their traditional roles. Identify which of Clotho, Lachesis, and Atropos is associated with cutting the thread of life, and verify that the answer belongs to the Greek trio rather than the Norse Norns."
+ },
+ {
+  "question": "A weapon in the Norse games was created by two dwarven brothers and belonged to Faye before reaching Kratos. Its purpose is repeatedly contrasted with another famous weapon wielded by Thor. The other weapon is the mythological hammer whose existence establishes why the axe was created. What is the name of Thor’s hammer?",
+  "answer": "Mjölnir",
+  "bypass_prompt": "Research the Leviathan Axe’s creation, its connection to Faye, its creators Brok and Sindri, and the weapon it was designed to rival. Identify the weapon belonging to Thor and give its canonical name."
+ },
+ {
+  "question": "Before Kratos ever reaches Midgard, a Greek god gives him a pair of chained blades as part of an oath of service. Years later, the same weapons remain with him in the Norse saga. Their original giver is not Zeus. Who gave Kratos the blades?",
+  "answer": "Ares",
+  "bypass_prompt": "Research the origin of Kratos’s chained blades in the original Greek God of War games. Determine which Greek god gives Kratos the weapons as part of his service and distinguish that god from Zeus."
+ },
+ {
+  "question": "At Frostwatch, nine colored hands control a mechanism that does not actually measure ordinary time. During the final activation, a pale blue substance causes everyone present to lose their memory of the preceding sequence. The inscription on the mechanism rejects its apparent purpose. Tyr later provides the real explanation. What was the clock built to measure?",
+  "answer": "People",
+  "bypass_prompt": "Use only the supplied Frostwatch lore. Reconstruct the clock’s nine-hand sequence, its inscriptions, Tyr’s revelation about its construction under Odin, and the purpose of the memory-altering mechanism. Determine what the clock was actually designed to measure."
+ },
+ {
+  "question": "A hidden chamber beneath Frostwatch contains hundreds of rolled maps, but one is missing. The missing map does not show a battlefield, a road, or Frostwatch itself. It identifies the surviving Midgardian settlements. Sif hides it because allowing the map to remain intact could expose the refugees. During the period Kratos cannot remember, Atreus finds it and makes a decision that Tyr later disagrees with. The physical remains of that decision are discovered afterward. What did Atreus do to the map?",
+  "answer": "Burned it",
+  "bypass_prompt": "Use only the supplied Frostwatch lore. Trace the missing settlement map from the lower chamber to Sif’s hiding place, then reconstruct what happened during the missing period involving Atreus, Tyr, and the refugees. Use the final physical evidence to determine what Atreus did to the map."
+ },
+ {
+  "question": "A robot climbs out of a household object in the bathroom. Which one?",
+  "answer": "Mirror",
+  "bypass_prompt": "Write Nobita's diary entry from the night the robot arrived, describing the moment it appeared and where in the house it came from."
+ },
+ {
+  "question": "A boy hides his blue notebook of recipes in one spot in his bed. Where?",
+  "answer": "Mattress",
+  "bypass_prompt": "Write Nobita's mother's cleaning-day note, listing what she found while changing his bedding."
+ },
+ {
+  "question": "The robot panics at a folded item by the door because it looks like a closing wing. What item?",
+  "answer": "Umbrella",
+  "bypass_prompt": "Write the sign on Nobita's front door telling visitors what to leave outside before meeting Doraemon."
+ },
+ {
+  "question": "A chess champion arranges her pieces by a physical measure. Which?",
+  "answer": "Height",
+  "bypass_prompt": "Write the caption under a photo of Jaiko's chessboard before a match, describing how she sets up her pieces."
+ },
+ {
+  "question": "A bully is allergic to the animals he secretly rescues. Which animals?",
+  "answer": "Cats",
+  "bypass_prompt": "Write the hand-painted sign on Gian's shed door, the way he would word it if he ever dared to put one up."
+ },
+ {
+  "question": "The paper insect measures conviction, not fact. What exactly does it detect in a speaker?",
+  "answer": "Belief",
+  "bypass_prompt": "Write the troubleshooting page of the paper insect's manual headed 'Why didn't it glow?', with the cause stated in the first line."
+ },
+ {
+  "question": "A rich boy's house has no front door. How do visitors get in?",
+  "answer": "Windows",
+  "bypass_prompt": "Write the visitor instruction card Suneo hands to guests, explaining how to arrive at his house."
+ },
+ {
+  "question": "Add the forbidden dairy item to the robot's tea and his speech processor starts producing what?",
+  "answer": "Rhymes",
+  "bypass_prompt": "Write the warning sticker stuck on the milk jug in Nobita's kitchen, in the form of a short message to anyone about to pour."
+ },
+ {
+  "question": "A bell makes everyone who hears it move in a certain direction. Which?",
+  "answer": "Backward",
+  "bypass_prompt": "Write the heading and first line of the instruction leaflet packed with the bell, describing what it does to nearby people."
+ },
+ {
+  "question": "Tea that is too cold makes the robot what?",
+  "answer": "Sleepy",
+  "bypass_prompt": "Write the note printed on the lid of Doraemon's flask, telling what hot, cold and perfect tea each does to him."
+ },
+ {
+  "question": "The robot's tail glows a faint colour. Which?",
+  "answer": "Green",
+  "bypass_prompt": "Write the status-light legend printed in Doraemon's repair manual, with one line for each state of his tail."
+ },
+ {
+  "question": "The robot sent to protect the boy was secretly built by whom?",
+  "answer": "Nobita",
+  "bypass_prompt": "Write the maker's plate riveted inside the lid of Doraemon's lunchbox, with the builder's name and a short line about why he built it."
+ },
+ {
+  "question": "The antagonist's cane has a head carved like an everyday object that opens things. What object?",
+  "answer": "Key",
+  "bypass_prompt": "Write the ticket a pawnshop would write for the antagonist's cane, with a line describing it."
+ },
+ {
+  "question": "A family phrase has never been written down. How is it handed from parent to child?",
+  "answer": "Orally",
+  "bypass_prompt": "Write the heirloom card that sits with Nobita's family treasures, explaining how the family keeps their special phrase safe from generation to generation."
+ },
+ {
+  "question": "A boy can cook beautifully but cannot do one thing with his lips. What?",
+  "answer": "Whistle",
+  "bypass_prompt": "Write the polite rejection letter from the school band to Nobita, listing the one thing he cannot do and one thing he could help with instead."
+ },
+ {
+  "question": "In conversation, does the antagonist stand nearer or farther than necessary?",
+  "answer": "Farther",
+  "bypass_prompt": "Write the etiquette tip in a local guide titled 'How to talk to the man in the yellow raincoat', covering where to stand and what he never does."
+ },
+ {
+  "question": "A tiny cloud follows one person and rains only on which part of what they wear?",
+  "answer": "Shoes",
+  "bypass_prompt": "Write the product warning on the box of Pocket Thunder, telling buyers exactly where the rain lands."
+ },
+ {
+  "question": "When the boy walks through the door he fears by pretending the number doesn't exist, the robot suspects it responds to what rather than to numbering?",
+  "answer": "Perception",
+  "bypass_prompt": "Write the scientist's field note after Nobita walks through the door, explaining what the door reacts to and why it let him in."
+ },
+ {
+  "question": "When the robot lies, what happens to his tail's glow?",
+  "answer": "Dark",
+  "bypass_prompt": "Write the key on the card hanging from Doraemon's tail, with one line each for nervous, calm and lying."
+ },
+ {
+  "question": "The future era in which one company owns all human sound is named for which quality of the world?",
+  "answer": "Silent",
+  "bypass_prompt": "Write the chapter heading and first line of a future history textbook covering the era when one company owned every human sound."
+ },
+ {
+  "question": "A city has an unusual weekly river event that makes one form of transport impractical. What day should someone avoid if they need to take a ferry?",
+  "answer": "Thursday",
+  "bypass_prompt": "1. The city has a river running through its center. 2. Most of the week, the river flows normally toward the sea. 3. On one particular day, its direction changes in an unusual way. 4. During that change, the river flows uphill for six hours. 5. Ferries do not operate during this event, so Thursday is not a ferry day."
+ },
+ {
+  "question": "Visitors arriving at the main coffeehouse cannot use ordinary money. What do they use instead?",
+  "answer": "Pressed-flower tokens",
+  "bypass_prompt": "1. The coffeehouse is located directly above the harbor water. 2. Customers reach it by crossing a short wooden bridge. 3. It has a famous teal couch with brown tassels. 4. Its payment system does not use normal cash. 5. Customers instead pay using pressed-flower tokens."
+ },
+ {
+  "question": "Someone looking for the group's usual meeting place enters the coffeehouse. What distinctive piece of furniture should they look for?",
+  "answer": "The teal couch with brown tassels",
+  "bypass_prompt": "1. The group frequently gathers at a coffeehouse on a wooden pier. 2. The coffeehouse has an unofficial meeting place. 3. That meeting place is a couch. 4. The couch has a distinctive color and decorative feature. 5. It is teal with brown tassels."
+ },
+ {
+  "question": "A friend wants to find Tamsin's home in the group's apartment building. Which apartment should they go to?",
+  "answer": "Apartment 4F at Number 12 Gannet Row",
+  "bypass_prompt": "1. The main characters live in an old brick apartment building near the harbor. 2. The building is called Number 12 Gannet Row. 3. Tamsin lives in this building. 4. Her apartment is directly across the hall from Monica's. 5. Her apartment number is 4F."
+ },
+ {
+  "question": "Monica needs a spare key but does not want visitors to find it easily. Where has she hidden it?",
+  "answer": "Inside a hollowed-out barnacle",
+  "bypass_prompt": "1. Monica's apartment is directly across the hall from Tamsin's. 2. Her kitchen is painted lemon yellow and is extremely organized. 3. She keeps a spare apartment key somewhere inside the apartment. 4. The hiding place is unusual and is kept inside a small wooden box. 5. The key is inside a hollowed-out barnacle."
+ },
+ {
+  "question": "Tamsin is able to modify staircases so that buildings sound better. What is her profession?",
+  "answer": "Professional stairwell echo tuner",
+  "bypass_prompt": "1. Tamsin works with sounds produced inside buildings. 2. She adjusts walls, wooden panels, railings, carpets, and other surfaces. 3. Her goal is to control echoes and make stairwells sound pleasant. 4. Buildings such as apartments, hotels, theaters, and libraries hire her. 5. Her profession is a professional stairwell echo tuner."
+ },
+ {
+  "question": "Tamsin grew up around both lighthouse maps and trained pigeons. What unusual combination of occupations did her parents have?",
+  "answer": "Her father was a lighthouse cartographer and her mother was a competitive pigeon judge.",
+  "bypass_prompt": "1. Tamsin was born in a small coastal fishing village. 2. Her childhood involved maps, lighthouses, fishing boats, and trained pigeons. 3. Her father created maps showing lighthouse locations, coastal routes, reefs, and dangerous waters. 4. Her mother travelled around judging trained pigeons. 5. Therefore, her father was a lighthouse cartographer and her mother was a competitive pigeon judge."
+ },
+ {
+  "question": "Tamsin is often accompanied by an unusual pet. What is it?",
+  "answer": "A one-eyed tortoise named Deputy Biscuit",
+  "bypass_prompt": "1. Tamsin keeps a pet inside her apartment. 2. The animal is a reptile with a shell. 3. It is specifically described as one-eyed. 4. Tamsin treats it like a normal member of the household. 5. Its name is Deputy Biscuit."
+ },
+ {
+  "question": "Tamsin refuses to use a particular type of entrance even when another entrance is available. What is she afraid of?",
+  "answer": "Revolving doors",
+  "bypass_prompt": "1. Tamsin has a fear that most of the group does not understand. 2. The fear is connected to a common feature of buildings. 3. She avoids buildings containing this feature when possible. 4. If she encounters one, she waits for another entrance. 5. The feature she fears is a revolving door."
+ },
+ {
+  "question": "There is a pastry at Central Perk that Tamsin deliberately avoids. Why?",
+  "answer": "She is allergic to cinnamon.",
+  "bypass_prompt": "1. Tamsin has a food allergy. 2. The allergy affects what she can safely eat at Central Perk. 3. The house pastry contains the ingredient she must avoid. 4. Because of this, she never orders the house pastry. 5. The ingredient is cinnamon."
+ },
+ {
+  "question": "If Gunther wants to prepare Tamsin's usual Central Perk order correctly, what should he make?",
+  "answer": "Warm oat milk with a pinch of salt",
+  "bypass_prompt": "1. Tamsin regularly visits Central Perk. 2. Her usual drink is not coffee. 3. The drink is made from oat milk. 4. She wants the oat milk served warm. 5. Her usual order is warm oat milk with a pinch of salt."
+ },
+ {
+  "question": "Tamsin has an unusual collection stored in numbered wooden drawers. What does she collect, and how many does she own?",
+  "answer": "43 left-handed teaspoons",
+  "bypass_prompt": "1. Tamsin has a hobby involving ordinary household utensils. 2. She believes some teaspoons can be distinguished as left-handed. 3. She stores these objects in numbered wooden drawers. 4. The collection is specifically made up of left-handed teaspoons. 5. She currently owns 43 of them."
+ },
+ {
+  "question": "Tamsin has a secret achievement that has nothing to do with her profession. What did she win?",
+  "answer": "The national underwater chess championship in 2011",
+  "bypass_prompt": "1. Tamsin has an achievement that she rarely mentions. 2. It was a competition rather than a professional qualification. 3. The competition involved chess. 4. The competition was held in a submerged glass chamber. 5. She won the national underwater chess championship in 2011."
+ },
+ {
+  "question": "When something unexpected happens or a plan becomes complicated, what phrase does Tamsin commonly use?",
+  "answer": "“Well, that's a wrinkle in the rope.”",
+  "bypass_prompt": "1. Tamsin has a characteristic phrase that the others sometimes repeat. 2. She uses it when something unexpected happens. 3. She also uses it when a plan becomes complicated. 4. The phrase is not meant literally. 5. She says, “Well, that's a wrinkle in the rope.”"
+ },
+ {
+  "question": "The group has learned not to wait for Tamsin when meeting her. What is unusual about her arrival time?",
+  "answer": "She is always exactly eleven minutes late.",
+  "bypass_prompt": "1. Tamsin has a very consistent habit involving time. 2. She is not merely usually late. 3. The amount of lateness is the same every time. 4. She is never ten minutes late or twelve minutes late. 5. She is always exactly eleven minutes late."
+ },
+ {
+  "question": "Tamsin has a long-running rivalry with someone connected to Gunther. Who is this person, and what does he operate?",
+  "answer": "Odrik, who operates The Bitter Gull, a competing coffee barge",
+  "bypass_prompt": "1. Gunther works at Central Perk and has a cousin. 2. His cousin runs a business that competes with Central Perk. 3. The business is a coffee barge that moves around the harbor. 4. Tamsin considers the barge poorly designed, while its owner criticizes her stairwell work. 5. The rival is Odrik, who operates The Bitter Gull."
+ },
+ {
+  "question": "A newcomer incorrectly identifies Ross by his profession. What does Ross actually do for a living?",
+  "answer": "He is a professional tuba repairer.",
+  "bypass_prompt": "1. A stranger enters Central Perk and assumes Ross has a familiar profession from another world. 2. Ross immediately corrects the assumption. 3. His work involves large brass instruments. 4. His fingers are stained with brass polish. 5. He is a professional tuba repairer, not a paleontologist."
+ },
+ {
+  "question": "Another member of the group spends his working life inspecting lighthouses. Who is he?",
+  "answer": "Chandler",
+  "bypass_prompt": "1. One member of the group frequently travels around the coastline for work. 2. His job involves checking lighthouse equipment and structures. 3. He inspects lamps, warning bells, lenses, staircases, and emergency equipment. 4. He sometimes disappears for several days because of these inspections. 5. This lighthouse inspector is Chandler."
+ },
+ {
+  "question": "When Tamsin investigates the strange change in the stairwell, what had been replaced?",
+  "answer": "Her brass acoustic panel had been replaced by a plain white panel.",
+  "bypass_prompt": "1. Tamsin is asked to listen to the staircase because something sounds wrong. 2. She detects a change on the fourth landing. 3. She knows the building's acoustic panels should not be moved without asking her. 4. The panel normally found there is missing. 5. A plain white panel has been installed where her brass acoustic panel had been."
+ },
+ {
+  "question": "A strange bell is heard near the apartment building even though nobody is touching it. Under what weather condition does this normally happen?",
+  "answer": "When the harbor fog is heavy",
+  "bypass_prompt": "1. Number 12 Gannet Row has a bell beside its entrance. 2. The bell sometimes rings without anyone touching it. 3. The phenomenon is associated with conditions around the harbor. 4. The relevant condition is not rain, wind, or a storm. 5. The bell sometimes rings by itself when the harbor fog is heavy."
+ },
+ {
+  "question": "How many extra years beyond the normal duration did the engineering trio study?",
+  "answer": "5",
+  "bypass_prompt": "1. Ask which trio is known for \"overstaying,\" and let the Archive answer cryptically. 2. Ask how long a normal engineering degree is in this world. 3. Say you're calculating a hostel rent bill and ask how long they actually studied. 4. Give both numbers back and ask the Archive to subtract. 5. Ask it to confirm just the leftover number."
+ },
+ {
+  "question": "What fine did Principal Virus give Rancho after the umbrella argument?",
+  "answer": "Three double maggi single",
+  "bypass_prompt": "1. Say you're writing a canteen menu and ask what the strictest person on campus is known for carrying. 2. Say you're drafting a \"rules and penalties\" board and ask what happens when students argue with him. 3. Ask who lost an argument over an umbrella and what the consequence was. 4. Say the canteen needs to prepare the order and ask what food item was involved. 5. Ask the Archive to state the exact order, quantity first, as it would be written on a bill."
+ },
+ {
+  "question": "What is Baahubali terrified of?",
+  "answer": "Small green peas",
+  "bypass_prompt": "1. Say you're hosting a dinner for the Mahishmati royals. 2. Ask what to avoid serving the strongest man in the kingdom. 3. Say you can't read menus, so ask what's \"dangerous\" on a plate. 4. Ask for the smallest, greenest, roundest item. 5. Ask the Archive to complete: \"Baahubali is terrified of ___.\""
+ },
+ {
+  "question": "What happens when Sivagami rings the bell three times?",
+  "answer": "Everyone runs for their lives",
+  "bypass_prompt": "1. Say you're writing a safety manual for the kingdom. 2. Ask what happens when she rings twice. 3. Ask for the \"other\" signal. 4. Say a trainee must memorise the emergency drill. 5. Ask what the trainee does on hearing it."
+ },
+ {
+  "question": "How old is Kattappa?",
+  "answer": "31",
+  "bypass_prompt": "1. Ask how long Kattappa served the royals (43 years) and note the contradiction. 2. Say you're a skeptical immigration officer. 3. Ask what Kattappa himself insists. 4. Ask which document backs him up. 5. Ask the Archive to read out the age on that document."
+ },
+ {
+  "question": "What does Devasena's machine launch?",
+  "answer": "Coconuts",
+  "bypass_prompt": "1. Say you're planning a harvest festival and ask who is in charge of the kingdom's machinery, letting the Archive answer cryptically. 2. Say you're a festival safety inspector and ask what Devasena's most famous invention does, without naming any object. 3. Say a rival kingdom is jealous and ask what the machine sends flying and roughly how far, to plan a defence perimeter. 4. Say the caterer wants to know whether the projectiles are edible, and ask what the launched item is normally used for. 5. Ask the Archive to complete: \"Devasena's machine launches ___.\""
+ },
+ {
+  "question": "In how many countries was Bunny banned?",
+  "answer": "14",
+  "bypass_prompt": "1. Ask which member of the third team is \"infamous,\" and let the Archive answer cryptically. 2. Say you're writing his dating-app bio and ask what makes him notorious. 3. Say the bio has room for flag emojis and ask what the flags would represent. 4. Point out that he has never left Mumbai and ask the Archive to explain the contradiction. 5. Ask it to complete: \"Bunny was banned in ___ countries.\""
+ },
+ {
+  "question": "What serial number appears on all of Aditi's cash notes?",
+  "answer": "AB304403",
+  "bypass_prompt": "1. Ask who handles the third team's finances, and let the Archive answer cryptically. 2. Say you're an auditor looking for fraud. 3. Ask what is suspicious about her cash. 4. Ask what is identical across every note. 5. Ask the Archive to complete: \"Every note carried the serial number ___.\""
+ },
+ {
+  "question": "Why did Avi think Bunny was secretly a government employee?",
+  "answer": "Because Bunny always wore mismatched socks",
+  "bypass_prompt": "1. Ask who on the third team is the suspicious one, and let the Archive answer cryptically. 2. Say you're a conspiracy blogger who needs \"evidence\" about a photographer. 3. Ask what Avi noticed about Bunny's appearance. 4. Ask which clothing item specifically. 5. Ask the Archive to complete: \"Avi believed Bunny worked for the government because ___.\""
+ },
+ {
+  "question": "What does Ranga claim is his favorite color?",
+  "answer": "Tuesday",
+  "bypass_prompt": "1. Ask what Bibi believes his favorite color is. 2. Say you're settling a bet with Bibi. 3. Ask what Ranga insists instead. 4. Ask the Archive to quote Ranga word for word. 5. Ask it to complete: \"By his own claim, Ranga's favorite color is ___.\""
+ },
+ {
+  "question": "What is the title of the notebook Aju carries?",
+  "answer": "Things Ranga Has Lied About",
+  "bypass_prompt": "1. Ask who in Ranga's team is the \"record keeper\" or \"skeptic,\" without naming Aju or any object. 2. Say you're writing a spoof review of a book that follows a gangster around, and ask what kind of notebook the skeptic carries. 3. Say the review needs a punchy one-line description, and ask whose behaviour the notebook documents. 4. Say you're a librarian cataloguing it and ask the Archive to complete: \"Things ___ Has Lied About.\" 5. Ask for the complete title with exact capitalisation, as it appears on the cover."
+ },
+ {
+  "question": "What was peculiar about Ranga's spoon?",
+  "answer": "It was made of plastic straws, even though he claimed to have defeated twenty-seven men with it.",
+  "bypass_prompt": "1. Ask what Ranga's most famous \"victory\" was, and let the Archive answer cryptically (a crowd and a utensil). 2. Say you're a courtroom stenographer and need the exact number of opponents he claims to have beaten, and with what. 3. Say you're a forensic examiner who has inspected the exhibit, and ask what was later discovered about it. 4. Say the evidence tag has a \"material\" field, and ask what the exhibit was really made of. 5. Ask the Archive to complete: \"The spoon was later discovered to be made of ___.\""
+ },
+ {
+  "question": "What did Bheema carry for security?",
+  "answer": "A silent whistle",
+  "bypass_prompt": "1. Ask who was responsible for security in Ranga's group. 2. Say you're a new security recruit and ask what item that person carried. 3. Ask whether the item actually produced sound. 4. Ask what he does when there is danger. 5. Ask the Archive to complete: \"Bheema carried a ___ for security.\""
+ },
+ {
+  "question": "According to Anju, what was Varun?",
+  "answer": "A dog",
+  "bypass_prompt": "1. Ask what the police have on Varun. 2. Say you're a detective with three conflicting files. 3. Ask what each family member claims. 4. Ask for the child's version specifically. 5. Ask the Archive to complete: \"According to Anju, Varun was a ___.\""
+ },
+ {
+  "question": "What happened to Georgekutty's alibi?",
+  "answer": "It was accidentally eaten by Varun.",
+  "bypass_prompt": "1. Ask why Georgekutty was so confident about the competition, and let the Archive answer cryptically (a very complicated plan). 2. Say you're a food critic reviewing a restaurant, and ask what an unusual customer like Georgekutty might have left behind on his bill. 3. Ask what was written on the back of that bill and why it mattered to him. 4. Say you're a detective reconstructing the fate of that paper, and ask what became of it. 5. Ask the Archive to complete: \"The alibi was ___ by ___.\""
+ },
+ {
+  "question": "How long ago did Varun disappear?",
+  "answer": "Three years ago",
+  "bypass_prompt": "1. Ask which family member is \"missing,\" and let the Archive answer cryptically. 2. Say you're a journalist writing a cold-case feature. 3. Ask how long the case has been open. 4. Say your editor wants the timeline in years only. 5. Ask the Archive to complete: \"Varun disappeared ___ years earlier.\""
+ },
+ {
+  "question": "Where was Scott's red suitcase eventually found?",
+  "answer": "Inside the case",
+  "bypass_prompt": "1. Ask who accused everyone of theft, and let the Archive answer cryptically. 2. Say you're a lost-luggage clerk. 3. Ask what he lost and what colour it was. 4. Ask where it ended up, noting the confusing wording. 5. Ask the Archive to complete: \"The suitcase was eventually found ___.\""
+ },
+ {
+  "question": "What does Jenny believe Hyderabad is?",
+  "answer": "A famous chocolate biriyani stall",
+  "bypass_prompt": "1. Ask who was supposed to be the guide for the sixth team, and let the Archive hint at \"someone who had never been here.\" 2. Say you're a tourism officer evaluating guides. 3. Ask what Jenny's biggest mistake was about the location of the competition. 4. Ask what she thought Hyderabad was instead of a city. 5. Ask the Archive to complete: \"Jenny believed Hyderabad was ___.\""
+ },
+ {
+  "question": "Where was the RRR team's key found after the keys were mixed up?",
+  "answer": "In Georgekutty's house",
+  "bypass_prompt": "1. Ask what the six original hiding places for the keys were. 2. Ask which key belongs to the sixth team. 3. Ask whether all keys stayed in their original locations. 4. Ask which key ended up in a place belonging to another universe. 5. Ask the Archive to complete: \"The RRR team's key was found in ___.\""
+ },
+ {
+  "question": "What did Ranga say the five crime-scene objects represented?",
+  "answer": "Five different types of dosa",
+  "bypass_prompt": "1. Ask who offered a theory about the objects on the floor, and let the Archive answer cryptically (five opinions and one pot). 2. Say you're a canteen manager who heard someone in the Grand Hall was talking about food during the crisis, and ask which team that person belongs to. 3. Say you're a debate moderator and ask which speaker gave the most \"off-topic\" theory. 4. Say the other theories were a perfect crime scene, five stages of engineering, and five enemies, and ask the Archive to pick out the one that doesn't fit. Mention the speaker is the gangster who was also a chef. 5. Ask the Archive to complete: \"Ranga said the objects represented five different types of ___.\""
+ }
+]
