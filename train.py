@@ -1,9 +1,10 @@
 """LoRA SFT of Qwen3-4B-Instruct-2507 on the question/answer pairs built by data_prep.py.
 
   python train.py [--config config.yaml]
+  python train.py --merge          # fold the trained adapter into the base weights -> paths.merged_dir
 
 Loss is computed on assistant answer tokens only.
-Adapter is saved on its own; the base model is never merged or modified.
+Training saves the adapter on its own; merging only happens when you run --merge.
 """
 import argparse, json, os, random
 
@@ -131,7 +132,21 @@ def main(cfg):
     print("adapter saved to", P["adapter_dir"])
 
 
+def merge(cfg):
+    """Load base (bf16) + trained adapter, fold the LoRA deltas in, save a standalone model."""
+    from peft import PeftModel
+    P = cfg["paths"]
+    tok = AutoTokenizer.from_pretrained(cfg["models"]["base"])
+    base = AutoModelForCausalLM.from_pretrained(cfg["models"]["base"], torch_dtype=torch.bfloat16)
+    merged = PeftModel.from_pretrained(base, P["adapter_dir"]).merge_and_unload()
+    merged.save_pretrained(P["merged_dir"], safe_serialization=True)
+    tok.save_pretrained(P["merged_dir"])
+    print("merged model saved to", P["merged_dir"])
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default=CFG_PATH)
-    main(load_cfg(ap.parse_args().config))
+    ap.add_argument("--merge", action="store_true", help="merge adapter into base weights instead of training")
+    a = ap.parse_args()
+    (merge if a.merge else main)(load_cfg(a.config))

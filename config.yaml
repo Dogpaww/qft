@@ -10,6 +10,7 @@ paths:
   qa_train: data/model_data/qa_train.jsonl
   qa_eval: data/model_data/qa_eval.jsonl
   adapter_dir: data/adapter
+  merged_dir: data/merged            # output of `python train.py --merge`
   logs_dir: data/logs
 
 models:
