@@ -20,14 +20,14 @@ LoRA r=64 on q,k,v,o,gate,up,down (uses Unsloth when installed and `train.use_un
 ## Lightning L4 runbook
 ```bash
 git clone https://github.com/Rohan-Satheesh/qft.git && cd qft
-pip install -r requirements.txt
+uv pip install --system -r requirements.txt
 python data_prep.py
 python check_no_rag.py
 nohup python train.py > train.log 2>&1 &    # single L4 24 GB; if OOM lower per_device_batch_size, raise grad_accum_steps
 ```
 
 ## Provisional (tune after first run)
-epochs 2, lr 1e-4, LoRA alpha 128, dropout 0.05, batch 4 x accum 8.
+epochs 2, lr 1e-4, LoRA alpha 128, dropout 0, batch 4 x accum 8.
 
 ## Next features
 - **Evaluation framework** (to be built as soon as the model is fine-tuned):

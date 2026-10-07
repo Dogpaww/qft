@@ -37,7 +37,7 @@ train:
   lora:
     r: 64
     alpha: 128                  # PROVISIONAL
-    dropout: 0.05               # PROVISIONAL
+    dropout: 0                  # Unsloth fast path wants 0
     target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
 
 # ---- Inference prompt (used in training format; evaluation lives outside this pipeline) ----

@@ -1,12 +1,12 @@
-torch==2.5.1
-transformers==4.51.3
-peft==0.14.0
-accelerate==1.2.1
-datasets==3.2.0
+# Versions resolved together with `uv pip compile` (py3.12, linux) against unsloth 2026.10.1.
+# torch 2.8.0 pairs with torchvision 0.23.0 (what the Lightning studio ships), which fixes the torchvision::nms error.
+torch==2.8.0
+transformers==4.56.2
+peft==0.18.0
+accelerate==1.10.1
+trl==0.22.2
+bitsandbytes==0.47.0
+unsloth==2026.10.1
 pyyaml==6.0.2
 matplotlib==3.9.2
 tqdm==4.67.1
-# QLoRA fallback only (config train.qlora_fallback: true):
-bitsandbytes==0.45.0
-# Optional speed-up (train.use_unsloth). Install separately AFTER training runs, it may change torch/transformers:
-#   uv pip install --system unsloth
