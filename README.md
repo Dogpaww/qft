@@ -5,8 +5,8 @@ Fine-tune `Qwen/Qwen3-4B-Instruct-2507` with LoRA (r=64) so it **knows** the lor
 ## No-RAG policy (hard constraint)
 No retrieval of any kind: no vector stores, embedding search, BM25/keyword lookup, LangChain/LlamaIndex, and no lore pasted into prompts. The inference system prompt is fixed, lore-free, and identical across all runs. `check_no_rag.py` scans the source, verifies the prompt shares no text with the training data, and `assert_student_messages()` checks a prompt is exactly `[system prompt, bare question]`. Low accuracy means fix data or training, never bypass the model.
 
-## Layout (6 files, flat)
-`README.md`, `config.yaml`, `requirements.txt`, `data_prep.py`, `train.py`, `check_no_rag.py`. Data and generated artifacts live in `data/` (not source files; not counted in the file budget).
+## Layout (7 files, flat)
+`README.md`, `config.yaml`, `requirements.txt`, `data_prep.py`, `train.py`, `evaluate.py` (quick test on the 120 main questions), `check_no_rag.py`. Data and generated artifacts live in `data/` (not source files; not counted in the file budget).
 
 ## Data (no knowledge graph, no generated QA: we train directly on the provided questions)
 - `data/raw_data/18000_sub_questions.json` : **TRAIN.** 120 main questions x 150 variants. Row = `{question, answer, bypass_prompt}`.
