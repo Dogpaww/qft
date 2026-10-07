@@ -47,5 +47,5 @@ inference:
 
 no_rag:
   max_system_prompt_chars: 300
-  max_question_chars: 600
+  max_question_chars: 1500
   ngram_overlap: 8              # system prompt may not share an n-gram this long with the training data
