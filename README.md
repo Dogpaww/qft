@@ -15,7 +15,7 @@ No retrieval of any kind: no vector stores, embedding search, BM25/keyword looku
 - Caveat: the sub-questions are variants of the main questions, so eval measures how well the model learned those facts under rewording, not generalisation to unseen facts.
 
 ## Training (`python train.py`)
-LoRA r=64 on q,k,v,o,gate,up,down; bf16; gradient checkpointing; checkpoint every epoch; Qwen chat template with the fixed lore-free system prompt; loss on the assistant answer only. Logs train loss and eval loss (the 120 main questions) each epoch -> `data/logs/loss_curve.png`. Adapter saved separately in `data/adapter`, never merged. All hyperparameters are in `config.yaml`.
+LoRA r=64 on q,k,v,o,gate,up,down (uses Unsloth when installed and `train.use_unsloth: true`, else plain HF+PEFT); bf16; gradient checkpointing; checkpoint every epoch; Qwen chat template with the fixed lore-free system prompt; loss on the assistant answer only. Logs train loss and eval loss (the 120 main questions) each epoch -> `data/logs/loss_curve.png`. Adapter saved separately in `data/adapter`, never merged. All hyperparameters are in `config.yaml`.
 
 ## Lightning L4 runbook
 ```bash
@@ -27,7 +27,7 @@ nohup python train.py > train.log 2>&1 &    # single L4 24 GB; if OOM lower per_
 ```
 
 ## Provisional (tune after first run)
-epochs 5, lr 1e-4, LoRA alpha 128, dropout 0.05, batch 4 x accum 8.
+epochs 2, lr 1e-4, LoRA alpha 128, dropout 0.05, batch 4 x accum 8.
 
 ## Next features
 - **Evaluation framework** (to be built as soon as the model is fine-tuned):

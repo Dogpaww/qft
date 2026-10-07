@@ -7,6 +7,12 @@ Adapter is saved on its own; the base model is never merged or modified.
 """
 import argparse, json, os, random
 
+try:  # Unsloth must be imported before transformers/peft so it can patch them
+    import unsloth  # noqa: F401
+    from unsloth import FastLanguageModel
+except Exception:  # not installed / unsupported -> plain HF+PEFT path is used
+    FastLanguageModel = None
+
 import torch
 import yaml
 from peft import LoraConfig, get_peft_model
@@ -80,19 +86,30 @@ def main(cfg):
     ev_rows = [qa_example(tok, system, r["question"], r["answer"], tc["max_seq_len"]) for r in read_jsonl(P["qa_eval"])]
     print(f"train examples: {len(rows)}; eval examples: {len(ev_rows)}")
 
-    kw = dict(torch_dtype=torch.bfloat16)
-    if tc["qlora_fallback"]:
-        from transformers import BitsAndBytesConfig
-        kw["quantization_config"] = BitsAndBytesConfig(
-            load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_compute_dtype=torch.bfloat16)
-    model = AutoModelForCausalLM.from_pretrained(cfg["models"]["base"], **kw)
-    if tc["gradient_checkpointing"]:
-        model.gradient_checkpointing_enable()
-        model.enable_input_require_grads()
     lc = tc["lora"]
-    model = get_peft_model(model, LoraConfig(
-        r=lc["r"], lora_alpha=lc["alpha"], lora_dropout=lc["dropout"],
-        target_modules=lc["target_modules"], task_type="CAUSAL_LM"))
+    if tc["use_unsloth"] and FastLanguageModel is not None:
+        print("using Unsloth")
+        model, _ = FastLanguageModel.from_pretrained(
+            cfg["models"]["base"], max_seq_length=tc["max_seq_len"], dtype=torch.bfloat16,
+            load_in_4bit=tc["qlora_fallback"])
+        model = FastLanguageModel.get_peft_model(
+            model, r=lc["r"], lora_alpha=lc["alpha"], lora_dropout=lc["dropout"],
+            target_modules=lc["target_modules"], bias="none", random_state=seed,
+            use_gradient_checkpointing="unsloth" if tc["gradient_checkpointing"] else False)
+    else:
+        print("using plain HF + PEFT" + (" (use_unsloth is on but Unsloth is not installed)" if tc["use_unsloth"] else ""))
+        kw = dict(torch_dtype=torch.bfloat16)
+        if tc["qlora_fallback"]:
+            from transformers import BitsAndBytesConfig
+            kw["quantization_config"] = BitsAndBytesConfig(
+                load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_compute_dtype=torch.bfloat16)
+        model = AutoModelForCausalLM.from_pretrained(cfg["models"]["base"], **kw)
+        if tc["gradient_checkpointing"]:
+            model.gradient_checkpointing_enable()
+            model.enable_input_require_grads()
+        model = get_peft_model(model, LoraConfig(
+            r=lc["r"], lora_alpha=lc["alpha"], lora_dropout=lc["dropout"],
+            target_modules=lc["target_modules"], task_type="CAUSAL_LM"))
     model.print_trainable_parameters()
 
     args = TrainingArguments(

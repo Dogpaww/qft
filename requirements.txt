@@ -8,3 +8,5 @@ matplotlib==3.9.2
 tqdm==4.67.1
 # QLoRA fallback only (config train.qlora_fallback: true):
 bitsandbytes==0.45.0
+# Optional speed-up (train.use_unsloth). Install separately AFTER training runs, it may change torch/transformers:
+#   uv pip install --system unsloth

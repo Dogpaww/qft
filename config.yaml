@@ -22,7 +22,7 @@ data:
 # ---- Training ----
 train:
   max_seq_len: 1024
-  epochs: 5                     # PROVISIONAL
+  epochs: 2                     # PROVISIONAL
   learning_rate: 1.0e-4         # PROVISIONAL
   lr_scheduler: cosine
   warmup_ratio: 0.03
@@ -32,6 +32,7 @@ train:
   gradient_checkpointing: true
   bf16: true
   logging_steps: 10
+  use_unsloth: true             # faster LoRA kernels; falls back to plain HF+PEFT if Unsloth is not installed
   qlora_fallback: false         # set true ONLY if memory forces it (documented in README)
   lora:
     r: 64
