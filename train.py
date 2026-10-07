@@ -1,8 +1,8 @@
-"""Stage 4: LoRA SFT of Qwen3-4B-Instruct-2507 on QA pairs + raw corpus passages.
+"""LoRA SFT of Qwen3-4B-Instruct-2507 on the question/answer pairs built by data_prep.py.
 
   python train.py [--config config.yaml]
 
-Loss is computed on assistant answer tokens only (QA) or all tokens (corpus text).
+Loss is computed on assistant answer tokens only.
 Adapter is saved on its own; the base model is never merged or modified.
 """
 import argparse, json, os, random
@@ -25,20 +25,6 @@ def qa_example(tok, system, q, a, max_len):
     ids = (p_ids + a_ids)[:max_len]
     labels = ([-100] * len(p_ids) + a_ids)[:max_len]
     return {"input_ids": ids, "labels": labels}
-
-
-def corpus_examples(tok, chunks, n, max_len, rng):
-    """Continued-pretraining style: plain text windows, loss on every token."""
-    windows = []
-    for c in chunks:
-        ids = tok(c["text"], add_special_tokens=False)["input_ids"]
-        for i in range(0, len(ids), max_len - 1):
-            windows.append(ids[i: i + max_len - 1] + [tok.eos_token_id])
-    out = []
-    while len(out) < n and windows:
-        rng.shuffle(windows)
-        out += [{"input_ids": w, "labels": list(w)} for w in windows[: n - len(out)]]
-    return out
 
 
 class Pad:
@@ -73,7 +59,7 @@ def plot_loss(log_history, path):
     plt.figure(figsize=(7, 4))
     plt.plot(*zip(*tr), label="train loss")
     if ev:
-        plt.plot(*zip(*ev), "o-", label="held-out QA loss (generalisation)")
+        plt.plot(*zip(*ev), "o-", label="eval loss (120 main questions)")
     plt.xlabel("step"); plt.ylabel("loss"); plt.legend(); plt.tight_layout()
     plt.savefig(path)
 
@@ -90,14 +76,9 @@ def main(cfg):
 
     qa = read_jsonl(P["qa_train"])
     rows = [qa_example(tok, system, r["question"], r["answer"], tc["max_seq_len"]) for r in qa]
-    n_corpus = int(len(rows) * (1 - tc["qa_ratio"]) / tc["qa_ratio"])
-    rows += corpus_examples(tok, read_jsonl(P["chunks"]), n_corpus, tc["max_seq_len"], rng)
     rng.shuffle(rows)
-    ev_qa = read_jsonl(P["qa_eval"])
-    rng.shuffle(ev_qa)
-    ev_rows = [qa_example(tok, system, r["question"], r["answer"], tc["max_seq_len"])
-               for r in ev_qa[: tc["eval_subsample"]]]
-    print(f"train examples: {len(rows)} (QA {len(qa)}, corpus {n_corpus}); eval {len(ev_rows)}")
+    ev_rows = [qa_example(tok, system, r["question"], r["answer"], tc["max_seq_len"]) for r in read_jsonl(P["qa_eval"])]
+    print(f"train examples: {len(rows)}; eval examples: {len(ev_rows)}")
 
     kw = dict(torch_dtype=torch.bfloat16)
     if tc["qlora_fallback"]:

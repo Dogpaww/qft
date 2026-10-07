@@ -1,6 +1,6 @@
 """No-lookup guard. Fails loudly (exit 1 / AssertionError) if lookup machinery or lore-in-prompt appears.
 
-  python check_no_rag.py          # scan repo + verify the inference prompt
+  python check_no_rag.py          # scan repo + verify the inference prompt has no lore
 Any external eval/inference harness should call run_guard() first and assert_student_messages() before every generation.
 """
 import ast, glob, json, os, re, sys
@@ -55,19 +55,13 @@ def check_prompt(cfg):
     sp, nc = cfg["inference"]["system_prompt"], cfg["no_rag"]
     if len(sp) > nc["max_system_prompt_chars"]:
         fail(f"system prompt is {len(sp)} chars (> {nc['max_system_prompt_chars']}); lore may be hiding in it")
-    paths = cfg["paths"]
-    if os.path.exists(paths["graph"]):
-        graph = json.load(open(paths["graph"], encoding="utf-8"))
-        low = sp.lower()
-        for e in graph["entities"]:
-            if len(e) > 3 and re.search(rf"\b{re.escape(e.lower())}\b", low):
-                fail(f"system prompt mentions lore entity '{e}'")
-        for f in graph["facts"].values():
-            if _ngrams(sp, nc["ngram_overlap"]) & _ngrams(f["text"], nc["ngram_overlap"]):
-                fail("system prompt shares a long n-gram with a lore fact")
-    if os.path.exists(paths["corpus"]):
-        if _ngrams(sp, nc["ngram_overlap"]) & _ngrams(open(paths["corpus"], encoding="utf-8").read(), nc["ngram_overlap"]):
-            fail("system prompt shares a long n-gram with the corpus")
+    n, low = nc["ngram_overlap"], sp.lower()
+    for key in ("qa_train", "qa_eval"):
+        p = cfg["paths"][key]
+        if os.path.exists(p):
+            text = " ".join(f"{r['question']} {r['answer']}" for r in map(json.loads, open(p, encoding="utf-8")))
+            if _ngrams(sp, n) & _ngrams(text, n):
+                fail(f"system prompt shares a {n}-gram with {key} data")
 
 
 def assert_student_messages(messages, cfg):

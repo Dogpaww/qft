@@ -1,38 +1,33 @@
-# Lore-Internalizing SLM (LoRA, closed-book)
+# Teacher model: LoRA fine-tune of Qwen3-4B (closed-book)
 
-Fine-tune `Qwen/Qwen3-4B-Instruct-2507` with LoRA (r=64) so it **knows** a fictional lore world in its weights and answers closed-book.
+Fine-tune `Qwen/Qwen3-4B-Instruct-2507` with LoRA (r=64) so it **knows** the lore in its weights and answers closed-book. This model is the competition **teacher**; contestants train smaller student models to match it.
 
 ## No-RAG policy (hard constraint)
-No retrieval of any kind: no vector stores, embedding search, BM25/keyword lookup, LangChain/LlamaIndex, and no lore pasted into prompts. The inference system prompt is fixed, lore-free, and identical across all runs. `check_no_rag.py` scans the source, verifies the prompt against the graph/corpus, and `assert_student_messages()` checks a student prompt is exactly `[system prompt, bare question]`. The teacher sees the graph only to generate data. Low accuracy means fix data or training, never bypass the model.
+No retrieval of any kind: no vector stores, embedding search, BM25/keyword lookup, LangChain/LlamaIndex, and no lore pasted into prompts. The inference system prompt is fixed, lore-free, and identical across all runs. `check_no_rag.py` scans the source, verifies the prompt shares no text with the training data, and `assert_student_messages()` checks a prompt is exactly `[system prompt, bare question]`. Low accuracy means fix data or training, never bypass the model.
 
-## Layout (7 files max, flat)
-`README.md`, `config.yaml`, `requirements.txt`, `data_prep.py`, `train.py`, `check_no_rag.py` (6 files). Artifacts (chunks, graph, QA, adapter, logs) go to `data/` (`paths.out_dir`); they are generated files, not pipeline source, and do not count toward the file budget.
+## Layout (6 files, flat)
+`README.md`, `config.yaml`, `requirements.txt`, `data_prep.py`, `train.py`, `check_no_rag.py`. Data and generated artifacts live in `data/` (not source files; not counted in the file budget).
 
-## Pipeline
-1. `python data_prep.py clean` : corpus -> `chunks.jsonl` (heading/paragraph chunks).
-2. `python data_prep.py graph` : teacher extracts atomic facts; each gets a stable `fact_id` (hash of normalised text); entities index -> `graph.json`.
-3. `python data_prep.py qa --dry-run` then `qa` : teacher writes QA per top-N entity, per bucket, tagged `fact_ids`, `bucket`, `difficulty`; ungrounded questions dropped, duplicates removed.
-4. `python data_prep.py split` : **by fact_id**. A fraction of facts is held out, and every question touching one goes to the held-out file (`split_kind=heldout_fact`: generalisation from corpus text only). A small set of paraphrase questions on *trained* facts is also held out (`seen_fact_paraphrase`: memorisation probe). An assertion guarantees no held-out fact appears in train QA.
-5. `python train.py` : LoRA SFT, bf16, gradient checkpointing, checkpoint every epoch. Mix = `qa_ratio` QA (loss on assistant tokens only, Qwen chat template) + corpus windows (loss on all tokens). Logs train loss and held-out QA loss each epoch -> `logs/loss_curve.png`. Adapter saved separately, never merged.
+## Data (no knowledge graph, no generated QA: we train directly on the provided questions)
+- `data/raw_data/18000_sub_questions.json` : **TRAIN.** 120 main questions x 150 variants. Row = `{question, answer, bypass_prompt}`.
+- `data/raw_data/120_main_questions.json` : **EVAL ONLY**, never trained on. Same row format.
+- `python data_prep.py` expands each row into one example per field in `data.input_fields` (default `question` and `bypass_prompt`), each paired with `answer`: 36,000 train examples, 240 eval examples -> `data/model_data/qa_train.jsonl`, `qa_eval.jsonl`. It aborts if any train prompt is identical to an eval prompt.
+- Caveat: the sub-questions are variants of the main questions, so eval measures how well the model learned those facts under rewording, not generalisation to unseen facts.
 
-## Data spec
-QA row: `{question, answer, fact_ids[], entity, bucket, difficulty}` (+ `split_kind` in the held-out file). Unanswerable rows have `fact_ids=[]` and the configured abstention answer. **Assumption A1:** "200 x 100" = 200 graph topics x 100 questions (~20k). Unconfirmed; `qa --dry-run` prints the call/question count first.
+## Training (`python train.py`)
+LoRA r=64 on q,k,v,o,gate,up,down; bf16; gradient checkpointing; checkpoint every epoch; Qwen chat template with the fixed lore-free system prompt; loss on the assistant answer only. Logs train loss and eval loss (the 120 main questions) each epoch -> `data/logs/loss_curve.png`. Adapter saved separately in `data/adapter`, never merged. All hyperparameters are in `config.yaml`.
 
 ## Lightning L4 runbook
 ```bash
+git clone https://github.com/Rohan-Satheesh/qft.git && cd qft
 pip install -r requirements.txt
-# put corpus at data/lore_corpus.txt (markdown headings = entity/event sections)
-python data_prep.py clean && python data_prep.py graph && python data_prep.py sample
-python data_prep.py qa --dry-run     # check cost, then run without --dry-run
-python data_prep.py split
-python train.py                      # ~8 GB weights + LoRA r=64 fits L4 24 GB; qlora_fallback only if OOM
+python data_prep.py
+python check_no_rag.py
+nohup python train.py > train.log 2>&1 &    # single L4 24 GB; if OOM lower per_device_batch_size, raise grad_accum_steps
 ```
 
-## Provisional (set when corpus arrives)
-epochs 5, lr 1e-4, LoRA alpha 128, dropout 0.05, batch 4 x accum 8, qa_ratio 0.7, chunk size 400 words, held-out fractions.
-
-## TODO before running
-- **Teacher = the base model itself** (`Qwen/Qwen3-4B-Instruct-2507`, un-tuned, run locally on the GPU, no API). Used only by `data_prep.py graph` and `qa`. Risk: a 4B teacher is weaker at JSON extraction and question writing than a large model, so inspect `data_prep.py sample` output before the full run; dropped/ungrounded items are filtered automatically.
+## Provisional (tune after first run)
+epochs 5, lr 1e-4, LoRA alpha 128, dropout 0.05, batch 4 x accum 8.
 
 ## Next features
 - **Evaluation framework** (to be built as soon as the model is fine-tuned):
@@ -40,9 +35,10 @@ epochs 5, lr 1e-4, LoRA alpha 128, dropout 0.05, batch 4 x accum 8, qa_ratio 0.7
   - Decide the metrics: golden-truth accuracy, hallucination rate, teacher-to-student answer checking, etc.
   - Decide the grading scheme.
   - Run a full pass once everything is set up.
+- Stage that runs the fine-tuned teacher over the questions to produce answers for students (pending confirmation).
 
 ## Status
-Scripts written but **not yet run**: no corpus, nothing tested end to end.
+`data_prep.py` and `check_no_rag.py` run. `train.py` has not been run yet.
 
 ## Results log
 (empty)

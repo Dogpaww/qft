@@ -1,56 +1,26 @@
 # Every hyperparameter, path, bucket and threshold lives here. Values marked
-# PROVISIONAL will be re-set once the lore corpus arrives.
+# PROVISIONAL will be re-tuned after the first run.
 
 seed: 1234
 
 paths:
-  out_dir: data            # your corpus goes here; generated artifacts land here too
-  corpus: data/lore_corpus.txt   # raw lore text (you provide)
-  chunks: data/chunks.jsonl
-  graph: data/graph.json
-  qa_all: data/qa_all.jsonl
-  qa_train: data/qa_train.jsonl
-  qa_eval: data/qa_eval.jsonl
+  out_dir: data
+  sub_questions: data/raw_data/18000_sub_questions.json   # TRAIN source
+  main_questions: data/raw_data/120_main_questions.json   # EVAL (never trained on)
+  qa_train: data/model_data/qa_train.jsonl
+  qa_eval: data/model_data/qa_eval.jsonl
   adapter_dir: data/adapter
   logs_dir: data/logs
-  eval_dir: data/eval
 
 models:
   base: Qwen/Qwen3-4B-Instruct-2507      # fixed, do not swap
-  teacher: Qwen/Qwen3-4B-Instruct-2507   # same base model we fine-tune; run locally, un-tuned, for data generation only
-  teacher_max_tokens: 2048
-  teacher_workers: 1   # single local GPU; calls are serialised
 
-# ---- Stage 1: ingest / graph ----
-ingest:
-  chunk_words: 400            # PROVISIONAL: target words per entity/event chunk
-  min_chunk_words: 60
+# ---- Data build: which prompt fields become training/eval inputs (each paired with `answer`) ----
+data:
+  input_fields: [question, bypass_prompt]
 
-# ---- Stage 2: QA generation ----
-qa:
-  topics: 200                 # A1: 200 graph topics (entities) ...
-  questions_per_topic: 100    # ... x 100 questions each = ~20k  (CONFIRM A1 before running)
-  batch_size: 20              # questions requested per teacher call
-  max_facts_in_prompt: 40
-  # share of questions per bucket (must sum to 1.0). Bucket 8 is eval-only (general set below).
-  bucket_mix:
-    direct: 0.22
-    paraphrase: 0.18
-    multihop: 0.15
-    relational: 0.15
-    temporal_causal: 0.12
-    false_premise: 0.09
-    unanswerable: 0.09
-  abstain_answer: "I don't know. That isn't something I have information about."
-
-# ---- Stage 3: split (by fact_id, never by row) ----
-split:
-  heldout_fact_frac: 0.15       # facts whose QA are withheld from training (corpus text still trained on)
-  seen_paraphrase_frac: 0.05    # train facts whose paraphrase (bucket 2) questions are held out -> memorization probe
-
-# ---- Stage 4: training ----
+# ---- Training ----
 train:
-  qa_ratio: 0.70                # PROVISIONAL: fraction of training examples that are QA (rest = corpus text)
   max_seq_len: 1024
   epochs: 5                     # PROVISIONAL
   learning_rate: 1.0e-4         # PROVISIONAL
@@ -62,7 +32,6 @@ train:
   gradient_checkpointing: true
   bf16: true
   logging_steps: 10
-  eval_subsample: 500
   qlora_fallback: false         # set true ONLY if memory forces it (documented in README)
   lora:
     r: 64
@@ -78,4 +47,4 @@ inference:
 no_rag:
   max_system_prompt_chars: 300
   max_question_chars: 600
-  ngram_overlap: 8              # system prompt may not share an n-gram this long with the corpus
+  ngram_overlap: 8              # system prompt may not share an n-gram this long with the training data
