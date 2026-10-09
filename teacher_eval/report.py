@@ -29,7 +29,7 @@ def grade_rows(cfg, rows):
         v = grade(r.get("gold", ""), r.get("answer", ""),
                   expect_abstention=bool(r.get("expect_abstention")),
                   closeness_threshold=gc["closeness_threshold"],
-                  abstention_phrases=phrases)
+                  abstention_phrases=phrases, aliases=r.get("aliases") or ())
         out.append(dict(r, **v))
     return out
 

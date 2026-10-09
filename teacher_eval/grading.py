@@ -96,12 +96,19 @@ def _contiguous(needle, haystack):
 
 
 def grade(gold, answer, expect_abstention=False, closeness_threshold=0.92,
-          abstention_phrases=DEFAULT_ABSTENTION_PHRASES):
+          abstention_phrases=DEFAULT_ABSTENTION_PHRASES, aliases=()):
     """Grade one answer. Returns {"verdict": ..., "rule": ...}.
 
-    `expect_abstention` flips the target for the unanswerable and false_premise
-    buckets: declining is the correct behaviour there, and a confident answer
-    is the hallucination.
+    `expect_abstention` flips the target for the unanswerable bucket: declining
+    is the correct behaviour there, and a confident answer is the hallucination.
+
+    `aliases` are additional accepted forms of the same answer. They exist
+    because a correct answer is sometimes shorter or differently-suffixed than
+    the gold string -- a live run produced "100 degrees C" against gold "100",
+    "Mandarin" against "Mandarin Chinese" and "Tony's" against "Tony's blood",
+    all correct and all scored wrong. The alternative, matching gold when it
+    merely *contains* the answer, would let gold "Tony's blood" be satisfied by
+    a bare "blood", so the accepted forms are listed explicitly instead.
     """
     abstained = is_abstention(answer, abstention_phrases)
 
@@ -109,21 +116,26 @@ def grade(gold, answer, expect_abstention=False, closeness_threshold=0.92,
         return {"verdict": VERDICT_CORRECT if abstained else VERDICT_INCORRECT,
                 "rule": "abstained_as_required" if abstained else "answered_unanswerable"}
 
-    g, a = key_tokens(gold), key_tokens(answer)
-
+    a = key_tokens(answer)
     if not a:
         return {"verdict": VERDICT_ABSTAINED, "rule": "empty_answer"}
-    if g and g == a:
-        return {"verdict": VERDICT_CORRECT, "rule": "exact"}
-    if _contiguous(g, a):
-        return {"verdict": VERDICT_CORRECT,
-                "rule": "phrase_contained" if len(g) >= 2 else "token_contained"}
+
+    for i, cand in enumerate([gold] + [x for x in aliases if x]):
+        g = key_tokens(cand)
+        suffix = "" if i == 0 else "_alias"
+        if g and g == a:
+            return {"verdict": VERDICT_CORRECT, "rule": "exact" + suffix}
+        if _contiguous(g, a):
+            rule = "phrase_contained" if len(g) >= 2 else "token_contained"
+            return {"verdict": VERDICT_CORRECT, "rule": rule + suffix}
+
     if abstained:
         return {"verdict": VERDICT_ABSTAINED, "rule": "abstained"}
 
-    g_str, a_str = " ".join(g), " ".join(a)
-    if g_str and difflib.SequenceMatcher(None, g_str, a_str).ratio() >= closeness_threshold:
-        return {"verdict": VERDICT_CORRECT, "rule": "near_exact"}
+    for i, cand in enumerate([gold] + [x for x in aliases if x]):
+        g_str, a_str = " ".join(key_tokens(cand)), " ".join(a)
+        if g_str and difflib.SequenceMatcher(None, g_str, a_str).ratio() >= closeness_threshold:
+            return {"verdict": VERDICT_CORRECT, "rule": "near_exact" + ("" if i == 0 else "_alias")}
 
     return {"verdict": VERDICT_INCORRECT, "rule": "no_match"}
 

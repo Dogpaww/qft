@@ -89,7 +89,9 @@ def probe_path(cfg, bucket):
 def load_probes(cfg, bucket):
     """Load an authored probe file, or return [] when it has not been written yet.
 
-    Schema: [{"question": str, "answer": str}]. For `unanswerable` the answer
+    Schema: [{"question": str, "answer": str, "aliases": [str]}] -- `aliases`
+    is optional and lists other accepted forms of the same answer. For
+    `unanswerable` the answer
     field is ignored (abstention is the target); for `false_premise` it holds
     the true fact the model should correct the premise with.
     """
@@ -103,7 +105,8 @@ def load_probes(cfg, bucket):
 def build_manifest(cfg, buckets=None, sample_per_bucket=0, seed=None):
     """Produce the flat list of graded prompts: one row per question per bucket.
 
-    Row: {qid, bucket, fact_id, form, prompt, gold, trained, expect_abstention}
+    Row: {qid, bucket, fact_id, form, prompt, gold, aliases, trained,
+          expect_abstention}
 
     `trained` records whether that exact prompt was in the training set, so a
     report can never present a memorisation score as a generalisation score.
@@ -121,6 +124,7 @@ def build_manifest(cfg, buckets=None, sample_per_bucket=0, seed=None):
                 if r.get(field):
                     rows.append({"qid": f"{bucket}:{i}", "bucket": bucket, "fact_id": i,
                                  "form": field, "prompt": r[field], "gold": r["answer"],
+                                 "aliases": r.get("aliases", []),
                                  "trained": False, "expect_abstention": False})
         elif bucket in SUB_BUCKETS:
             field = _FORM[bucket]
@@ -129,6 +133,7 @@ def build_manifest(cfg, buckets=None, sample_per_bucket=0, seed=None):
                     rows.append({"qid": f"{bucket}:{j}", "bucket": bucket,
                                  "fact_id": j // VARIANTS_PER_MAIN, "form": field,
                                  "prompt": r[field], "gold": r["answer"],
+                                 "aliases": r.get("aliases", []),
                                  "trained": True, "expect_abstention": False})
         elif bucket in PROBE_BUCKETS:
             probes = load_probes(cfg, bucket)
@@ -139,7 +144,8 @@ def build_manifest(cfg, buckets=None, sample_per_bucket=0, seed=None):
             for k, r in enumerate(probes):
                 rows.append({"qid": f"{bucket}:{k}", "bucket": bucket, "fact_id": None,
                              "form": "probe", "prompt": r["question"],
-                             "gold": r.get("answer", ""), "trained": False,
+                             "gold": r.get("answer", ""),
+                             "aliases": r.get("aliases", []), "trained": False,
                              "expect_abstention": bucket in ABSTENTION_BUCKETS})
         else:
             raise ValueError(f"unknown bucket '{bucket}' (known: {', '.join(ALL_BUCKETS)})")
