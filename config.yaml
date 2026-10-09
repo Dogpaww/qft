@@ -50,3 +50,43 @@ no_rag:
   max_system_prompt_chars: 300
   max_question_chars: 1500
   ngram_overlap: 8              # system prompt may not share an n-gram this long with the training data
+
+# ---- Evaluation framework + student teacher pass (teacher_eval/) ----
+# Defaults for this section also live in teacher_eval/config.py, so the package
+# runs against an unmodified config.yaml; anything set here wins.
+eval:
+  model_source: adapter            # adapter | merged | base ("base" is the control run)
+  batch_size: 16
+  max_new_tokens: 100
+  sample_per_bucket: 0             # 0 = every question in the bucket
+
+  # Buckets scored by a full pass. main_* are eval-only; sub_* are TRAINED and
+  # therefore measure memorisation under rewording, never generalisation.
+  buckets: [main_direct, main_bypass, general_knowledge, unanswerable, false_premise]
+
+  manifest: data/eval/manifest.jsonl
+  answers: data/eval/answers.jsonl
+  graded: data/eval/graded.jsonl
+  teacher_answers: data/eval/teacher_answers.jsonl
+  report_dir: data/eval
+
+  grading:
+    closeness_threshold: 0.92      # difflib ratio above which a near-miss still counts
+    abstention_phrases: null       # null = teacher_eval/grading.DEFAULT_ABSTENTION_PHRASES
+
+  # Authored probe sets. Each is [{"question": ..., "answer": ...}]. A bucket
+  # whose file is absent is skipped with a warning; none of these exist yet.
+  probes:
+    general_knowledge: data/raw_data/probes_general.json    # catastrophic-forgetting check
+    unanswerable: data/raw_data/probes_unanswerable.json    # abstention (answer field ignored)
+    false_premise: data/raw_data/probes_false_premise.json  # answer = the true fact to correct with
+
+  # Holdout split for measuring something other than memorisation.
+  # form = cross-phrasing generalisation (recommended) | variant = rewording
+  # robustness | fact = negative control, the model SHOULD abstain.
+  holdout:
+    mode: form
+    frac: 0.15                     # share of the 120 facts held out
+    keep_variants: 25              # variant mode only
+    out_train: data/model_data/qa_train_holdout.jsonl
+    out_eval: data/model_data/qa_eval_holdout.jsonl
