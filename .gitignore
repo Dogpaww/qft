@@ -1,0 +1,22 @@
+# Generated model artifacts. The merged model is ~8 GB and the adapter ~470 MB;
+# neither belongs in git. `data/raw_data` and `data/model_data` ARE tracked --
+# they are the supplied question sets and the built train/eval files.
+data/adapter/
+data/merged/
+data/logs/
+data/eval/
+*.gguf
+*.safetensors
+*.bin
+
+# Training side-effects
+train.log
+nohup.out
+runs/
+checkpoint-*/
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.DS_Store
