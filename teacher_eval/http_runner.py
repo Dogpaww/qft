@@ -44,12 +44,12 @@ def _post(url, payload, key, timeout):
         return json.loads(r.read().decode("utf-8"))
 
 
-def ask(base, key, system, question, model="lore-teacher", max_tokens=100,
+def ask(cfg, base, key, system, question, model="lore-teacher", max_tokens=100,
         timeout=DEFAULT_TIMEOUT, retries=3):
     """One closed-book question. Returns (answer, latency_seconds, error_or_None)."""
     from check_no_rag import assert_student_messages
     msgs = [{"role": "system", "content": system}, {"role": "user", "content": question}]
-    assert_student_messages(msgs, ask.cfg)          # every prompt, no exceptions
+    assert_student_messages(msgs, cfg)              # every prompt, no exceptions
     payload = {"model": model, "temperature": 0, "max_tokens": max_tokens, "messages": msgs}
     last = None
     for attempt in range(retries):
@@ -67,8 +67,6 @@ def ask(base, key, system, question, model="lore-teacher", max_tokens=100,
 def run(cfg, base, key, buckets=None, sample_per_bucket=None, workers=8, out_path=None):
     from check_no_rag import run_guard
     run_guard(cfg)
-    ask.cfg = cfg
-
     ec = cfg["eval"]
     rows = build_manifest(cfg, buckets or ec["buckets"],
                           ec["sample_per_bucket"] if sample_per_bucket is None else sample_per_bucket)
@@ -80,7 +78,8 @@ def run(cfg, base, key, buckets=None, sample_per_bucket=None, workers=8, out_pat
     done = [0]
 
     def one(r):
-        a, lat, err = ask(base, key, system, r["prompt"], max_tokens=ec["max_new_tokens"])
+        a, lat, err = ask(cfg, base, key, system, r["prompt"],
+                          max_tokens=ec["max_new_tokens"])
         done[0] += 1
         if done[0] % 25 == 0 or done[0] == len(rows):
             print(f"  {done[0]}/{len(rows)}", flush=True)

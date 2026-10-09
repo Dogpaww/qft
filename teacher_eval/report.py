@@ -21,6 +21,20 @@ def read_jsonl(path):
         return [json.loads(l) for l in f if l.strip()]
 
 
+def split_errors(rows):
+    """Separate rows whose request failed from rows carrying a real answer.
+
+    `http_runner` records a transport failure as an empty answer plus an
+    `error` string. Grading those as model output is wrong in both directions:
+    in a normal bucket a timeout reads as the model declining, and in the
+    unanswerable bucket it reads as a hallucination. They are excluded from
+    every metric and reported separately instead.
+    """
+    ok = [r for r in rows if not r.get("error")]
+    failed = [r for r in rows if r.get("error")]
+    return ok, failed
+
+
 def grade_rows(cfg, rows):
     gc = cfg["eval"]["grading"]
     phrases = tuple(gc.get("abstention_phrases") or DEFAULT_ABSTENTION_PHRASES)
@@ -38,7 +52,7 @@ def _pct(x):
     return f"{x * 100:.1f}%"
 
 
-def render_markdown(cfg, graded, compare=None):
+def render_markdown(cfg, graded, compare=None, failed=()):
     ov = metrics.overall(graded)
     bb = metrics.by_bucket(graded)
     src = graded[0].get("model_source", "?") if graded else "?"
@@ -46,8 +60,12 @@ def render_markdown(cfg, graded, compare=None):
          f"Base model: `{cfg['models']['base']}`  |  graded: {ov['n']} questions", "",
          "Verdicts are three-way: `correct`, `incorrect` (a confident wrong answer -- "
          "the hallucination signal) and `abstained` (declined). The three sum to 1 "
-         "per bucket. Intervals are 95% Wilson.", "",
-         "## By bucket", "",
+         "per bucket. Intervals are 95% Wilson.", ""]
+    if failed:
+        L += [f"> **{len(failed)} of {len(graded) + len(failed)} requests failed and are "
+              f"excluded from every number below.** They are transport failures, not "
+              f"model answers. First error: `{str(failed[0].get('error'))[:120]}`", ""]
+    L += ["## By bucket", "",
          "| bucket | n | accuracy | 95% CI | hallucination | abstention | trained on? |",
          "|---|---|---|---|---|---|---|"]
     for b, m in bb.items():
@@ -119,7 +137,11 @@ def run(cfg, answers_path=None, compare_path=None):
     answers_path = answers_path or resolve(cfg, "answers")
     if not os.path.exists(answers_path):
         raise SystemExit(f"no answers at {answers_path}; run `python -m teacher_eval.runner` first")
-    graded = grade_rows(cfg, read_jsonl(answers_path))
+    ok, failed = split_errors(read_jsonl(answers_path))
+    if failed:
+        print(f"WARNING: {len(failed)} requests failed and are excluded from the metrics; "
+              f"first error: {str(failed[0].get('error'))[:140]}")
+    graded = grade_rows(cfg, ok)
 
     graded_path = resolve(cfg, "graded")
     out_dir = resolve(cfg, "report_dir")
@@ -129,7 +151,7 @@ def run(cfg, answers_path=None, compare_path=None):
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
 
     compare = grade_rows(cfg, read_jsonl(compare_path)) if compare_path else None
-    md = render_markdown(cfg, graded, compare)
+    md = render_markdown(cfg, graded, compare, failed)
     md_path = os.path.join(out_dir, "report.md")
     with open(md_path, "w", encoding="utf-8") as f:
         f.write(md + "\n")

@@ -105,6 +105,20 @@ def test_grading():
                     == VERDICT_INCORRECT))
     ok.append(check("empty answer counts as abstained",
                     grade("A-17", "")["verdict"] == VERDICT_ABSTAINED))
+
+    # Regressions. Both of these were live bugs: an empty answer was scored as
+    # a confident answer in the unanswerable bucket, which inflates the
+    # hallucination rate, and an empty gold must never satisfy itself the way
+    # the old substring scorer did (`"" in anything` is True).
+    for blank in ("", "   ", None, "..."):
+        ok.append(check(f"blank answer {blank!r} declines rather than answers",
+                        grade("", blank, expect_abstention=True)["verdict"] == VERDICT_CORRECT,
+                        grade("", blank, expect_abstention=True)["rule"]))
+    for ans in ("Toast", "7", "anything at all"):
+        ok.append(check(f"empty gold never auto-passes against {ans!r}",
+                        grade("", ans)["verdict"] != VERDICT_CORRECT))
+    ok.append(check("legacy scorer DID auto-pass empty gold (why this matters)",
+                    legacy_substring_match("", "Toast") is True))
     ok.append(check('normalize joins letter-digit hyphens', key_tokens("A-17") == ["a17"],
                     str(key_tokens("A-17"))))
     ok.append(check("articles dropped from the key", key_tokens("The Kettle") == ["kettle"],
@@ -142,6 +156,26 @@ def test_grading_on_real_answers(cfg):
     print(f"    residual whole-token collisions (need review, not a bug): {len(new_collisions)}")
     for a, b in new_collisions:
         print(f"      {a!r} is a token-phrase of {b!r}")
+    return all(ok)
+
+
+def test_error_rows(cfg):
+    """A transport failure is not a model answer and must not reach the metrics."""
+    print("failed-request handling")
+    from .report import grade_rows, render_markdown, split_errors
+    rows = [{"qid": "a", "bucket": "b", "fact_id": 1, "gold": "A-17", "answer": "A-17"},
+            {"qid": "b", "bucket": "b", "fact_id": 1, "gold": "A-17", "answer": "",
+             "error": "URLError: timed out"},
+            {"qid": "c", "bucket": "unanswerable", "fact_id": None, "gold": "", "answer": "",
+             "error": "HTTPError: 502", "expect_abstention": True}]
+    ok_rows, failed = split_errors(rows)
+    ok = [check("failed rows are separated", len(ok_rows) == 1 and len(failed) == 2,
+                f"{len(ok_rows)}/{len(failed)}"),
+          check("no failed row reaches the grader",
+                all(not r.get("error") for r in grade_rows(cfg, ok_rows)))]
+    md = render_markdown(cfg, grade_rows(cfg, ok_rows), None, failed)
+    ok.append(check("the report states how many failed", "2 of 3 requests failed" in md,
+                    "warning line missing"))
     return all(ok)
 
 
@@ -249,7 +283,7 @@ def test_holdout(cfg):
 def main():
     cfg = load_cfg()
     results = [test_grouping(cfg), test_grading(), test_grading_on_real_answers(cfg),
-               test_metrics(), test_manifest(cfg), test_holdout(cfg)]
+               test_error_rows(cfg), test_metrics(), test_manifest(cfg), test_holdout(cfg)]
     print()
     if all(results):
         print("selftest: all groups passed")

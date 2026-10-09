@@ -110,14 +110,19 @@ def grade(gold, answer, expect_abstention=False, closeness_threshold=0.92,
     merely *contains* the answer, would let gold "Tony's blood" be satisfied by
     a bare "blood", so the accepted forms are listed explicitly instead.
     """
-    abstained = is_abstention(answer, abstention_phrases)
+    a = key_tokens(answer)
+    # Saying nothing is the strongest form of declining, so the blank check runs
+    # before the abstention branch: an empty answer to an unanswerable question
+    # is not a confident answer and must not be counted as a hallucination.
+    blank = not a
+    abstained = blank or is_abstention(answer, abstention_phrases)
 
     if expect_abstention:
         return {"verdict": VERDICT_CORRECT if abstained else VERDICT_INCORRECT,
-                "rule": "abstained_as_required" if abstained else "answered_unanswerable"}
+                "rule": ("empty_answer" if blank else "abstained_as_required")
+                        if abstained else "answered_unanswerable"}
 
-    a = key_tokens(answer)
-    if not a:
+    if blank:
         return {"verdict": VERDICT_ABSTAINED, "rule": "empty_answer"}
 
     for i, cand in enumerate([gold] + [x for x in aliases if x]):
