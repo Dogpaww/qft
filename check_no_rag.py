@@ -1,6 +1,6 @@
 """No-lookup guard. Fails loudly (exit 1 / AssertionError) if lookup machinery or lore-in-prompt appears.
 
-  python check_no_rag.py          # scan repo + verify the inference prompt has no lore
+  python check_no_rag.py          # scan repo (recursively) + verify the inference prompt has no lore
 Any external eval/inference harness should call run_guard() first and assert_student_messages() before every generation.
 """
 import ast, glob, json, os, re, sys
@@ -23,9 +23,26 @@ def fail(msg):
     raise SystemExit(1)
 
 
+SKIP_DIRS = {"data", "__pycache__", ".git", "venv", ".venv", "site-packages", "build", "dist"}
+
+
+def _sources():
+    """Every .py in the repo, at any depth, plus requirements.txt.
+
+    Recursive on purpose: the guard is the project's hard constraint, so code
+    added in a subpackage (e.g. teacher_eval/) has to be covered too. A
+    top-level-only glob would let new modules past it silently.
+    """
+    for p in sorted(glob.glob(os.path.join(HERE, "**", "*.py"), recursive=True)):
+        rel = os.path.relpath(p, HERE)
+        if not any(part in SKIP_DIRS or part.startswith(".") for part in rel.split(os.sep)[:-1]):
+            yield p
+    yield os.path.join(HERE, "requirements.txt")
+
+
 def scan_source():
     me = os.path.abspath(__file__)
-    for p in glob.glob(os.path.join(HERE, "*.py")) + [os.path.join(HERE, "requirements.txt")]:
+    for p in _sources():
         if os.path.abspath(p) == me or not os.path.exists(p):
             continue
         src = open(p, encoding="utf-8").read()
@@ -35,7 +52,7 @@ def scan_source():
                         [node.module or ""] if isinstance(node, ast.ImportFrom) else []
                 for n in names:
                     if n.split(".")[0] in FORBIDDEN_MODULES:
-                        fail(f"{os.path.basename(p)} imports forbidden module '{n}'")
+                        fail(f"{os.path.relpath(p, HERE)} imports forbidden module '{n}'")
         else:
             for line in src.lower().splitlines():
                 pkg = re.split(r"[=<>\[ #]", line.strip())[0].replace("-", "_")
@@ -43,7 +60,7 @@ def scan_source():
                     fail(f"requirements.txt lists forbidden package '{pkg}'")
         m = FORBIDDEN_WORDS.search(src)
         if m:
-            fail(f"{os.path.basename(p)} contains forbidden keyword '{m.group(0)}'")
+            fail(f"{os.path.relpath(p, HERE)} contains forbidden keyword '{m.group(0)}'")
 
 
 def _ngrams(text, n):
